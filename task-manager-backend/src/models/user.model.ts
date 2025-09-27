@@ -1,6 +1,7 @@
-import mongoose, { Schema, model, Document } from "mongoose";
+// https://chatgpt.com/c/68d55b0d-4750-8332-b4c2-0e8cb218cf13
+import mongoose, { Schema, model, Document, Model } from "mongoose";
 import Joi from "joi";
-
+import bcrypt from 'bcrypt';
 export interface IUser extends Document {
   username: string;
   email: string;
@@ -12,7 +13,13 @@ export interface IUser extends Document {
   gender: string;
 }
 
-const userSchema = new Schema<IUser>(
+interface IUserMethods {
+  comparePassword(candidate: string): Promise<boolean>;
+}
+
+type UserModel = Model<IUser, {}, IUserMethods>;
+
+const userSchema = new Schema<IUser, UserModel, IUserMethods>(
   {
     username: {
       type: String,
@@ -79,5 +86,16 @@ const userSchema = new Schema<IUser>(
   }
 );
 
-const User = mongoose.model("User", userSchema);
+userSchema.pre("save", async function(next){
+  if(!this.isModified('password')) return next();
+  const salt = await bcrypt.genSalt(10);
+  this.password = await bcrypt.hash(this.password, salt);
+  next();
+});
+
+userSchema.methods.comparePassword = function(password:string) {
+  return bcrypt.compare(password, this.password);
+} 
+
+const User = mongoose.model<IUser, UserModel>("User", userSchema);
 export default User;
