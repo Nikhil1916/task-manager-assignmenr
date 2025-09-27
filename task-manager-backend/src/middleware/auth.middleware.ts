@@ -13,6 +13,7 @@ export function requireAuth(req: Request, res: Response, next: NextFunction) {
   try {
     const payload = verifyToken(token);
     req.userId = payload.sub;
+    next();
   } catch (e) {
     return res.status(401).json({ message: "Invalid token" });
   }

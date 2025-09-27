@@ -3,7 +3,9 @@ import "dotenv/config";
 import express from "express";
 import cors from "cors";
 import { ENV } from "./config/env";
-import connectDb from "./config/db";
+import authRoutes from "./routes/auth.routes";
+import taskRoutes from "./routes/tasks.routes";
+
 
 export const app = express();
 const corsOptions = {
@@ -17,10 +19,14 @@ app.use(express.json());
 // app.use(cookieParser());
 
 app.get('/health', (_req, res) => res.json({ ok: true }));
-app.get("/",(req,res)=>{
-    console.log(req.cookies);
-    res.send('Cookies parsed!');
-});
+// app.get("/",(req,res)=>{
+//     console.log(req.cookies);
+//     res.send('Cookies parsed!');
+// });
+
+app.use('/api/auth', authRoutes);
+app.use('/api/tasks', taskRoutes);
+
 
 app.use((err: any, _req: express.Request, res: express.Response, _next: express.NextFunction) => {
   console.error(err);
