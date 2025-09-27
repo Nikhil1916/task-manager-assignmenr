@@ -1,0 +1,17 @@
+/* You can add global styles to this file, and also import other style files */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Optional: small tweaks */
+@layer base {
+  html, body { @apply bg-gray-50 text-gray-900; }
+}
+@layer components {
+  .btn { @apply inline-flex items-center gap-2 rounded-lg px-4 py-2 bg-indigo-600 text-white hover:bg-indigo-700 disabled:opacity-50; }
+  .btn-outline { @apply inline-flex items-center gap-2 rounded-lg px-4 py-2 border border-gray-300 hover:bg-gray-100; }
+  .card { @apply bg-white rounded-2xl shadow p-6; }
+  .input { @apply w-full rounded-lg border border-gray-300 px-3 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-500; }
+  .label { @apply block text-sm font-medium mb-1; }
+  .err { @apply text-sm text-red-600 mt-1; }
+}
