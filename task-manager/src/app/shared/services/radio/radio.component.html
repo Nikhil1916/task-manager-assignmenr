@@ -1,0 +1,21 @@
+<div [formGroup]="group">
+  <label class="form-label">{{ getLabel() }}</label>
+
+  <div class="form-check" *ngFor="let opt of field.options; let i = index">
+    <input
+      type="radio"
+      class="form-check-input"
+      [id]="field.key + '_' + i"
+      [formControlName]="field.key"
+      [value]="opt.value"
+      [ngClass]="{ 'is-invalid': isInvalid() }"
+    />
+    <label class="form-check-label" [for]="field.key + '_' + i">
+      {{ opt.label }}
+    </label>
+  </div>
+
+  <div class="invalid-feedback d-block" *ngIf="isInvalid()">
+    <div *ngFor="let err of getErrors()">{{ err }}</div>
+  </div>
+</div>

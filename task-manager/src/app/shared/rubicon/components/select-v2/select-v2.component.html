@@ -1,0 +1,12 @@
+<div *ngIf="group" [formGroup]="group" [class]="field?.cssClass">
+    <label *ngIf="field.label" [class]="field?.fieldClass">{{getLabel()}}</label>
+    <ng-select class="form-control custom-ng-select" [formControlName]="field.key" [id]="field.key" [ngClass]="{'is-invalid':isInvalid()}"
+    [items]="field?.options || []" bindLabel="label" bindValue="value" [placeholder]="'Select'" (change)="change($event)"   [multiple]="false" 
+    >
+    </ng-select>
+    <div class="invalid-feedback" *ngIf="isInvalid()">
+        <ng-container *ngFor="let err of getErrors()">
+            <div>{{ err }}</div>
+        </ng-container>
+    </div>
+</div>

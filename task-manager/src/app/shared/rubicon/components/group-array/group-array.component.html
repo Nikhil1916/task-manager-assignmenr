@@ -1,0 +1,12 @@
+<div [formGroup]="group">
+    <label>{{getLabel()}}</label>
+    <div [formArrayName]="field?.key">
+        <div *ngFor="let form of formArray?.controls; let i = index" [formGroupName]="i" class="array-item">
+            <ng-container *ngFor="let child of field?.children">
+                <ng-container appDynamicField [field]="child" [group]="form" [slug]="slug"></ng-container>
+            </ng-container>
+            <button (click)="removeItem(i)">Remove</button>
+        </div>
+        <button type="button" (click)="addItem()">Add</button>
+    </div>
+</div>
