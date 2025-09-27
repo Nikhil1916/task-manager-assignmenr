@@ -14,7 +14,7 @@ date → datepicker / native input type="date".
 array → nested form controls / repeatable items (jaise dynamic addresses / phones).
 
 custom → agar tumhare app me koi special component chahiye (ex: file upload, toggle, chips). -->
-<form [formGroup]="group" (ngSubmit)="submit()" [class]="parentClass">
+<form [formGroup]="group" (ngSubmit)="submit()" [class]="parentClass" autocomplete="off">
   <ng-container *ngFor="let field of fields">
     <ng-container *ngIf="formService.isFieldVisible(field, group)">
       <ng-container >

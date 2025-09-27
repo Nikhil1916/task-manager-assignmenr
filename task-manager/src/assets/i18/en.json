@@ -1,1 +1,51 @@
-{}
+{
+  "login": {
+    "errors": {
+      "email": {
+        "required": "Email is Required",
+        "pattern": "Email is Invalid"
+      },
+      "password": {
+        "required": "Password is Required"
+      }
+    },
+    "labels": {
+      "email": "Email",
+      "password": "Password"
+    }
+  },
+  "register": {
+    "errors": {
+      "email": {
+        "required": "Email is Required",
+        "pattern": "Email is Invalid"
+      },
+      "password": {
+        "required": "Password is Required"
+      },
+      "username": {
+        "required": "Username is Required",
+        "pattern": "Username is Invalid"
+      }
+    },
+    "labels": {
+      "email": "Email",
+      "password": "Password",
+      "username":"Username"
+    }
+  },
+  "task-form": {
+    "labels": {
+        "title":"Title",
+        "description":"Description"
+    },
+    "errors": {
+      "title": {
+        "required":"Title is Required"
+      },
+      "description": {
+        "required":"Description is Required"
+      } 
+    }
+  }
+}

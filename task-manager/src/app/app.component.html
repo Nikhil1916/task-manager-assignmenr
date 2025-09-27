@@ -1,1 +1,10 @@
-<router-outlet/>
+<nav class="bg-white border-b border-gray-200">
+  <div class="max-w-6xl mx-auto px-4 py-3 flex items-center gap-4">
+    <a routerLink="/tasks" class="font-semibold">Task Manager</a>
+    <span class="flex-1"></span>
+    <a *ngIf="!TokenStorage.get()" routerLink="/login" class="text-sm text-gray-700 hover:underline">Login</a>
+    <a *ngIf="!TokenStorage.get()" routerLink="/register" class="text-sm text-gray-700 hover:underline">Register</a>
+    <a *ngIf="TokenStorage.get()" (click)="logout()"  class="text-sm text-gray-700 hover:underline cursor-pointer">Logout</a>
+  </div>
+</nav>
+<router-outlet></router-outlet>

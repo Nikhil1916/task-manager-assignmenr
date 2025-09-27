@@ -6,9 +6,12 @@ import { signToken } from "../utils/jwt";
 export async function register(req: Request, res: Response) {
   try {
     const parsed = registerSchema.safeParse(req.body);
+    console.log(parsed);
     if (!parsed.success) {
+      console.log(parsed);
       return res.status(400).json({
         message: parsed.error.issues[0].message,
+        property: parsed?.error?.issues?.[0]?.path?.[0]
       });
     }
 
@@ -27,7 +30,7 @@ export async function register(req: Request, res: Response) {
 
     await user.save();
 
-    console.log(user);
+    // console.log(user);
 
     const token = signToken(user?.id);
 
@@ -36,8 +39,9 @@ export async function register(req: Request, res: Response) {
       user: { id: user.id, username: user.username, email: user.email },
     });
   } catch (e: any) {
+    console.log(e);
     return res.status(422).json({
-      err: e?.message,
+      message: e?.message,
       msg: "not able to create user",
     });
   }
@@ -48,6 +52,7 @@ export async function login(req: Request, res: Response) {
   if (!parsed.success) {
     return res.status(400).json({
       message: parsed.error.issues[0].message,
+      property: parsed?.error?.issues?.[0]?.path?.[0]
     });
   }
 

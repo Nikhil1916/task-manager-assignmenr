@@ -1,18 +1,25 @@
-import { Component, OnInit } from '@angular/core';
+import { AfterViewInit, Component, OnInit } from '@angular/core';
 import { FormCreateService } from '../../../shared/services/form-create.service';
+import { AuthService } from '../../../core/services/auth.service';
+import { Router } from '@angular/router';
+import { ToastService } from '../../../core/services/toast.service';
 
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
   styleUrl: './login.component.scss',
 })
-export class LoginComponent implements OnInit {
-  constructor(private formS:FormCreateService) {}
+export class LoginComponent implements OnInit, AfterViewInit {
+  constructor(private formS:FormCreateService,
+     private authS:AuthService,
+     private router: Router,
+     private toastS:ToastService
+    ) {}
   fieldConfig = [
     {
       key: 'email',
       type: 'text',
-      label: 'Email Address',
+      addType: 'email',
       tooltip: 'Enter a valid email',
       fieldClass: 'input',
       labelClass: 'label',
@@ -27,7 +34,6 @@ export class LoginComponent implements OnInit {
     {
       key: 'password',
       type: 'password',
-      label: 'Password',
       tooltip: 'Enter a valid password',
       fieldClass: 'input',
       labelClass: 'label',
@@ -42,6 +48,36 @@ export class LoginComponent implements OnInit {
 
   ngOnInit(): void {
       this.loginForm = this.formS.createForm(this.fieldConfig);
-      console.log(this.loginForm);
+      // this.loginForm.t
+      // console.log(this.loginForm);
+  }
+
+  ngAfterViewInit(): void {
+    // Let the browser finish autofill, then tell Angular to re-check validity
+        setTimeout(() => {
+      this.loginForm.updateValueAndValidity({ emitEvent: true });
+    });
+
+  }
+
+  submit() {
+    this.loginForm.markAllAsTouched();
+    if(this.loginForm.invalid) {
+      this.toastS.error("Please fill all the details");
+      return;
+    }
+    this.loading = true;
+    this.authS.login(this.loginForm.value).subscribe({
+      next:()=>{
+        this.loading = false;
+        this.toastS.success("Logged in successfully");
+        this.router.navigate(['/tasks'])
+      },
+      error:(e)=>{
+        this.loading = false;
+        this.toastS.error(e?.error?.message);
+      }
+    })
+    
   }
 }

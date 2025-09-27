@@ -6,7 +6,8 @@ export interface ITask extends Document {
     status: TaskStatus,
     user: Types.ObjectId,
     createdAt: Date,
-    updatedAt: Date
+    updatedAt: Date,
+    is_deleted: Boolean
 }
 
 const taskSchema = new Schema<ITask>(
@@ -29,6 +30,10 @@ const taskSchema = new Schema<ITask>(
             type: Schema.Types.ObjectId,
             ref:"User",
             required: true,
+        },
+        is_deleted: {
+            type: Boolean,
+            default: false
         }
     },
     {

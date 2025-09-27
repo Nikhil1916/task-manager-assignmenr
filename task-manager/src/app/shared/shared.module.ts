@@ -16,6 +16,7 @@ import { RadioComponent } from './services/radio/radio.component';
 import { DateComponent } from './rubicon/components/date/date.component';
 import { GroupArrayComponent } from './rubicon/components/group-array/group-array.component';
 import { PasswordComponent } from './rubicon/components/password/password.component';
+import { TextareaComponent } from './rubicon/components/textarea/textarea.component';
 
 @NgModule({
   declarations: [
@@ -32,7 +33,8 @@ import { PasswordComponent } from './rubicon/components/password/password.compon
     RadioComponent,
     DateComponent,
     GroupArrayComponent,
-    PasswordComponent
+    PasswordComponent,
+    TextareaComponent
   ],
   imports: [
     CommonModule,

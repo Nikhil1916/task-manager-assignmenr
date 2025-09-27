@@ -13,6 +13,7 @@ import { RadioComponent } from '../services/radio/radio.component';
 import { DateComponent } from './components/date/date.component';
 import { GroupArrayComponent } from './components/group-array/group-array.component';
 import { PasswordComponent } from './components/password/password.component';
+import { TextareaComponent } from './components/textarea/textarea.component';
 
 const components: any = {
     text:TextComponent,
@@ -22,7 +23,8 @@ const components: any = {
     radio: RadioComponent,
     date: DateComponent,
     array:GroupArrayComponent,
-    password: PasswordComponent
+    password: PasswordComponent,
+    textarea: TextareaComponent
 };
 
 @Directive({

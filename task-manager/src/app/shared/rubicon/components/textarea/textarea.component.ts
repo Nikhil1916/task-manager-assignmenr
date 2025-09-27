@@ -1,18 +1,16 @@
-import { AfterViewInit, Component, Input, OnChanges, OnInit, SimpleChanges } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { TranslationService } from '../../../services/translation.service';
 
-
 @Component({
-  selector: 'app-password',
-  templateUrl: './password.component.html',
-  styleUrl: './password.component.scss'
+  selector: 'app-textarea',
+  templateUrl: './textarea.component.html',
+  styleUrl: './textarea.component.scss'
 })
-export class PasswordComponent {
+export class TextareaComponent {
 
   @Input() field!:any;
   @Input() group!:any;
   @Input() slug!:string;
-  showPassword = false;
   constructor(private translateS:TranslationService) {}
 
   ngAfterViewInit(): void {
@@ -34,9 +32,5 @@ export class PasswordComponent {
   isInvalid() {
     const control = this.group.get(this.field.key);
     return !!(control && control.invalid && (control.dirty || control.touched));
-  }
-
-  togglePassword() {
-    this.showPassword = !this.showPassword;
   }
 }

@@ -9,20 +9,14 @@ import taskRoutes from "./routes/tasks.routes";
 
 export const app = express();
 const corsOptions = {
-  origin: ENV.CORS_ORIGIN, // Replace with your frontend's URL
-  methods: ['GET', 'POST', 'PUT', 'DELETE', 'PATCH'], // Allowed HTTP methods
-  credentials: true, // Allow credentials if needed
+  origin: ENV.CORS_ORIGIN,
+  methods: ['GET','POST','PUT','DELETE','PATCH','OPTIONS'],
+  allowedHeaders: ['Content-Type', 'Authorization'],
 };
 
 app.use(cors(corsOptions));
 app.use(express.json());
-// app.use(cookieParser());
-
 app.get('/health', (_req, res) => res.json({ ok: true }));
-// app.get("/",(req,res)=>{
-//     console.log(req.cookies);
-//     res.send('Cookies parsed!');
-// });
 
 app.use('/api/auth', authRoutes);
 app.use('/api/tasks', taskRoutes);
