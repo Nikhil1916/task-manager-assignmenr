@@ -4,7 +4,7 @@ A full-stack **MEAN** application (MongoDB • Express • Angular • Node) wit
 real-time task updates using **Socket.IO**.  
 Users can **register, login, create, update, delete and filter tasks**.
 Any change in tasks is broadcast instantly to all connected clients.
-
+included env file in the project itself for direct run
 ---
 
 ## ✨ Features
