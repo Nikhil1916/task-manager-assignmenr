@@ -3,6 +3,7 @@ import { FormCreateService } from '../../../shared/services/form-create.service'
 import { AuthService } from '../../../core/services/auth.service';
 import { Router } from '@angular/router';
 import { ToastService } from '../../../core/services/toast.service';
+import { SocketService } from '../../../core/services/socket.service';
 
 @Component({
   selector: 'app-login',
@@ -13,7 +14,8 @@ export class LoginComponent implements OnInit, AfterViewInit {
   constructor(private formS:FormCreateService,
      private authS:AuthService,
      private router: Router,
-     private toastS:ToastService
+     private toastS:ToastService,
+     private socketS:SocketService
     ) {}
   fieldConfig = [
     {
@@ -71,6 +73,7 @@ export class LoginComponent implements OnInit, AfterViewInit {
       next:()=>{
         this.loading = false;
         this.toastS.success("Logged in successfully");
+        this.socketS.connect();
         this.router.navigate(['/tasks'])
       },
       error:(e)=>{
